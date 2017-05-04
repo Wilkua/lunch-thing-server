@@ -1,0 +1,19 @@
+{
+  "name": "lunch-thing-server",
+  "version": "1.0.0",
+  "description": "Backend server to support restaurant searchign platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "William Drescher <william.drescher@drescherdigital.com>",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wilkua/lunch-thing-server.git"
+  },
+  "dependencies": {
+    "express": "4.15.2",
+    "uuid": "3.0.1"
+  }
+}
