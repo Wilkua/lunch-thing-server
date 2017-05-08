@@ -4,7 +4,8 @@
   "description": "Backend server to support restaurant searchign platform",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "nyc --reporter=html --reporter=text-summary mocha -C -u tdd -R spec \"**/*.spec.js\""
   },
   "author": "William Drescher <william.drescher@drescherdigital.com>",
   "license": "GPL-3.0",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.3.0",
+    "nyc": "^10.3.2",
     "sinon": "^2.2.0"
   }
 }

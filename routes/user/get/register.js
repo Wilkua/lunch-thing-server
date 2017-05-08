@@ -1,3 +1,6 @@
+const moment = require('moment');
+const uuid = require('uuid');
+
 const errcode = require('../../../errors').code;
 
 module.exports = (req, res, next) => {
@@ -9,14 +12,14 @@ module.exports = (req, res, next) => {
   // TODO(william): Need a better captcha system (Google?)
   const collection = db.collection('user_registrations');
   const doc = {
+    challenge: 'What is forty-two minus twenty-one?',
     created: moment().utc().format(),
-    registration_token: uuid(),
-    challenge: 'What is forty-two minus twenty-one?'
+    registration_token: uuid()
   };
   collection.insert(doc);
 
   res.status(200);
-  res.header('Content-Type', 'application/json');
+  res.type('json');
   res.json(doc);
 };
 

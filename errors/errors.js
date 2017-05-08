@@ -30,6 +30,11 @@ module.exports = {
     code: code.ERROR_INVALID_PARAMETER_TYPE,
     message: 'API function parameter is of an incorrect type',
     name: 'INVALID_PARAMETER_TYPE'
+  },
+  [code.ERROR_PASSWORD_INVALID]: {
+    code: code.ERROR_PASSWORD_INVALID,
+    message: 'Password does not meet security requirements',
+    name: 'INVALID_PASSWORD'
   }
 };
 
