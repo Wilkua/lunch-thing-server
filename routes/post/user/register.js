@@ -9,20 +9,13 @@ module.exports = (req, res, next) => {
     return next({status: 400, code: errcode.ERROR_INVALID_CONTENT_TYPE});
   }
 
-  let bodyJson = null;
-  try {
-    bodyJson = JSON.parse(req.body);
-  } catch (e) {
-    bodyJson = null;
-  }
-  
-  if (bodyJson === null) {
+  if (!req.body) {
     return next({status: 400, code: errcode.ERROR_INVALID_BODY_FORMAT});
   }
 
-  const email = bodyJson.email;
-  const plainTextPassword = bodyJson.password;
-  const name = bodyJson.name;
+  const email = req.body.email;
+  const plainTextPassword = req.body.password;
+  const name = req.body.name;
   
   if (!email || !plainTextPassword || !name) {
     return next({status: 400, code: errcode.ERROR_MISSING_PARAMETER});
@@ -78,5 +71,8 @@ module.exports = (req, res, next) => {
   if (!hasCapital || !hasLower || !hasNumber || !hasSymbol) {
     return next({status: 400, code: errcode.ERROR_PASSWORD_INVALID});
   }
+
+  res.status(201);
+  res.end();
 };
 

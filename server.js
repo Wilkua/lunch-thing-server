@@ -6,6 +6,7 @@
 
 'use strict';
 
+const bodyParser = require('body-parser');
 const express = require('express');
 const http = require('http');
 const https = require('https');
@@ -37,6 +38,8 @@ MongoClient.connect('mongodb://' + mongoUrl, (err, db) => {
   // Create the application
   const app = express();
   app.use(morgan('common'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}));
 
   app.locals.config = configuration;
   app.locals.db = db;

@@ -49,24 +49,24 @@ describe('POST /user/register', () => {
   });
 
   it('should return a 201 when sent correct information', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Password1!'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
     
     expect(resObj.status.callCount).to.equal(1, 'Status function not called');
-    expect(resObj.status.firstCall.args[0]).to.equal(200);
+    expect(resObj.status.firstCall.args[0]).to.equal(201);
     expect(resObj.end.callCount).to.equal(1, 'End function not called');
   });
 
   it('should insert a valid user in the database', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Password?1!_~'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(collection.insert.callCount).to.equal(1, 'Insert function not called');
@@ -102,10 +102,10 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error when email field is missing', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       name: 'Test User',
       password: 'Password1!'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -116,10 +116,10 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error when name field is missing', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       password: 'Password1!'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -130,10 +130,10 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error when password field is missing', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -144,11 +144,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if email is not a string', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 8,
       name: 'Test User',
       password: 'Password1!'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -159,11 +159,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if name is not a string', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 8,
       password: 'Password1!'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -174,11 +174,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password is not a string', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 8
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -189,11 +189,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password length is too short', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Pssw!1'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -204,11 +204,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password does not contain a capital letter', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'password!1'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -219,11 +219,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password does not contain a lowercase letter', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'PASSWORD!1'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -234,11 +234,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password does not contain a number', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Password!#'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -249,11 +249,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password does not contain a special symbol', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Password15'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
@@ -264,11 +264,11 @@ describe('POST /user/register', () => {
   });
 
   it('should return an error if password contains non-ascii characters', () => {
-    reqObj.body = JSON.stringify({
+    reqObj.body = {
       email: 'test@test.com',
       name: 'Test User',
       password: 'Password1!\n'
-    });
+    };
     postRegister(reqObj, resObj, nextObj);
 
     expect(nextObj.callCount).to.equal(1, 'next() function not called');
