@@ -8,8 +8,8 @@
 
 const router = require('express').Router();
 
-const getRegister = require('./user/get/register');
-const postRegister = require('./user/post/register');
+const getRegister = require('./get/user/register');
+const postRegister = require('./post/user/register');
 
 /**
  * GET /user/registration
